@@ -27,8 +27,7 @@ java --version'''
     stage('Run Coverity') {
       steps {
         withCoverityEnvironment(coverityInstanceUrl: 'http://10.107.85.94:8080', createMissingProjectsAndStreams: true, credentialsId: 'Coverity94', projectName: 'WebGoat', streamName: 'WebGoat', viewName: 'Outstanding Issues') {
-          sh '''cov-configure --java
-echo ${cov-idir}
+          sh '''echo ${cov-idir}
 echo "start Cpature ....."
 cov-build --dir ${cov-idir} mvn clean package
 echo "list capture ....."
