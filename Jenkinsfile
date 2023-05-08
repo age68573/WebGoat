@@ -43,7 +43,7 @@ cov-commit-defects --dir ${cov-idir} --url ${COV_URL} --stream ${COV_STREAM} --a
 
   }
   tools {
-    maven 'Apache Maven 3.8.7'
+    maven 'maven3.9'
     jdk 'java17'
   }
 }
