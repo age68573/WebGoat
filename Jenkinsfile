@@ -30,7 +30,7 @@ java --version'''
           sh '''cov-configure --java
 echo ${cov-idir}
 echo "start Cpature ....."
-cov-build --dir ${cov-idir} mvn clean install
+cov-build --dir ${cov-idir} mvn clean package
 echo "list capture ....."
 coverity list
 echo "start analyze ....."
