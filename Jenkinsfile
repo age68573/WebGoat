@@ -10,7 +10,8 @@ pipeline {
       parallel {
         stage('echo') {
           steps {
-            sh 'echo \'start\''
+            sh '''echo \'start\'
+echo \'java --version\''''
           }
         }
 
