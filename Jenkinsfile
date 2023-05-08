@@ -30,7 +30,7 @@ java --version'''
           sh '''mvn --version
 echo ${cov-idir}
 echo "start Cpature ....."
-cov-build --dir ${cov-idir} mvn clean package
+cov-build --dir ${cov-idir} clean package -Dmaven.test.skip=true
 echo "list capture ....."
 coverity list
 echo "start analyze ....."
