@@ -5,6 +5,9 @@ pipeline {
     }
 
   }
+  tools {
+    maven 'Apache Maven 3.8.7'
+  }
   stages {
     stage('echo') {
       steps {
