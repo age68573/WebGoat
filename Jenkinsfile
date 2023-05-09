@@ -45,8 +45,11 @@ cov-commit-defects --dir ${cov-idir} --url ${COV_URL} --stream ${COV_STREAM} --a
         }
 
         stage('BlackDuck') {
+          environment {
+            ENV_NAME = 'clean package -Dmaven.test.skip=true'
+          }
           steps {
-            synopsys_detect(detectProperties: '--blackduck.trust.cert=true  --detect.project.version.name=1 --detect.project.name=WebGoat --detect.maven.build.command="\'clean package -Dmaven.test.skip=true\'"  --detect.cleanup=true --blackduck.offline.mode=false  --detect.blackduck.signature.scanner.snippet.matching=NONE --detect.detector.search.depth=5 SNIPPET_MATCHING --detect.excluded.directories=idir', returnStatus: true)
+            synopsys_detect(detectProperties: '--blackduck.trust.cert=true  --detect.project.version.name=1 --detect.project.name=WebGoat --detect.maven.build.command="${ENV_NAME}"  --detect.cleanup=false --blackduck.offline.mode=false  --detect.blackduck.signature.scanner.snippet.matching=NONE --detect.detector.search.depth=5 SNIPPET_MATCHING --detect.excluded.directories=idir', returnStatus: true)
           }
         }
 
