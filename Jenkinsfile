@@ -57,6 +57,12 @@ cov-commit-defects --dir ${cov-idir} --url ${COV_URL} --stream ${COV_STREAM} --a
       }
     }
 
+    stage('Coverity results') {
+      steps {
+        coverityIssueCheck(coverityInstanceUrl: 'http://10.107.85.94:8080', credentialsId: 'Coverity94', markUnstable: true, viewName: 'Outstanding Issues', returnIssueCount: true, projectName: 'WebGoat')
+      }
+    }
+
   }
   tools {
     maven 'maven3.9'
