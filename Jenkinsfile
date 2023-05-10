@@ -71,7 +71,7 @@ cov-commit-defects --dir ${cov-idir} --url ${COV_URL} --stream ${COV_STREAM} --a
       
     stage('Nexus') {
       steps {
-        nexusArtifactUploader artifacts: [[artifactId: 'WebGoat', classifier: '', file: 'target/webgoat-2023.5-SNAPSHOT.jar', type: 'jar']], credentialsId: 'jenkins-user', groupId: 'WebGoat', nexusUrl: '10.107.72.6:31368', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-central-repo', version: '2023.5-SNAPSHOT'
+        nexusArtifactUploader artifacts: [[artifactId: 'webgoat', classifier: '', file: 'target/webgoat-2023.5-SNAPSHOT.jar', type: 'jar']], credentialsId: 'jenkins-user', groupId: 'org.owasp.webgoat', nexusUrl: '10.107.72.6:31368', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-central-repo', version: '2023.5-SNAPSHOT'
       }
     }
 
