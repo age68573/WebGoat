@@ -68,6 +68,12 @@ cov-commit-defects --dir ${cov-idir} --url ${COV_URL} --stream ${COV_STREAM} --a
         step([$class: 'CodeDxPublisher', analysisName: 'Build #${BUILD_NUMBER}', analysisResultConfiguration: [failureOnlyNew: false, failureSeverity: 'None', numBuildsInGraph: 0, policyBreakBuildBehavior: 'NoAction', unstableOnlyNew: false, unstableSeverity: 'None'],baseBranchName: 'main', key: 'api-key:hkZpD1V2WEpsMjC-cGjr5C24B2HDtvbp9FR4HQ5f', projectId: '5', selfSignedCertificateFingerprint: '', sourceAndBinaryFiles: '**',targetBranchName: 'blueocean', url: 'http://10.107.85.95:81/codedx'])
       }
     }
+      
+    stage('Nexus') {
+      steps {
+        nexusArtifactUploader artifacts: [[artifactId: 'WebGoat', classifier: '', file: 'target/webgoat-2023.5-SNAPSHOT.jar', type: 'jar']], credentialsId: 'jenkins-user', groupId: 'WebGoat', nexusUrl: '10.107.72.6:31368', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-central-repo', version: '2023.5-SNAPSHOT'
+      }
+    }
 
   }
   tools {
