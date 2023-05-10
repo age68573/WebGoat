@@ -50,7 +50,7 @@ cov-commit-defects --dir ${cov-idir} --url ${COV_URL} --stream ${COV_STREAM} --a
             DETECT_PLUGIN_ESCAPING = 'false'
           }
           steps {
-            synopsys_detect(detectProperties: '--blackduck.trust.cert=true  --detect.project.version.name=1 --detect.project.name=WebGoat --detect.cleanup=true --blackduck.offline.mode=false  --detect.blackduck.signature.scanner.snippet.matching=SNIPPET_MATCHING --detect.detector.search.depth=5 --detect.maven.build.command=${ENV_NAME} --detect.excluded.directories=idir ', returnStatus: true)
+            synopsys_detect(detectProperties: '--blackduck.trust.cert=true  --detect.project.version.name=1 --detect.project.name=WebGoat --detect.cleanup=true --blackduck.offline.mode=true  --detect.blackduck.signature.scanner.snippet.matching=NONE --detect.detector.search.depth=5 --detect.maven.build.command=${ENV_NAME} --detect.excluded.directories=idir ', returnStatus: true)
           }
         }
 
