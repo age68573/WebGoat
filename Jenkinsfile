@@ -6,6 +6,10 @@ pipeline {
   }
   environment {
     IMAGE_VERSION = 1
+    COVERITY_PROJECT = WebGoat
+    COVERITY_STREAM = WebGoat
+    DETECT_VERSION = v0.1
+    DETECT_PROJECT = WebGoat
   }
   stages {
     stage('echo') {
@@ -30,7 +34,7 @@ java --version'''
       parallel {
         stage('Run Coverity') {
           steps {
-            withCoverityEnvironment(coverityInstanceUrl: 'http://10.107.85.94:8080', createMissingProjectsAndStreams: true, credentialsId: 'Coverity94', projectName: 'WebGoat', streamName: 'WebGoat', viewName: 'Outstanding Issues') {
+            withCoverityEnvironment(coverityInstanceUrl: 'http://10.107.85.94:8080', createMissingProjectsAndStreams: true, credentialsId: 'Coverity94', projectName: ${COVERITY_PROJECT}, streamName: ${COVERITY_STREAM}, viewName: 'Outstanding Issues') {
               sh '''mvn --version
 '''
             }
@@ -44,7 +48,7 @@ java --version'''
             DETECT_PLUGIN_ESCAPING = 'false'
           }
           steps {
-            synopsys_detect(detectProperties: '--blackduck.trust.cert=true  --detect.project.version.name=v0.1 --detect.project.name=WebGoat --detect.cleanup=true --blackduck.offline.mode=false  --detect.blackduck.signature.scanner.snippet.matching=NONE --detect.detector.search.depth=0 --detect.maven.build.command=${ENV_NAME} --detect.excluded.directories=idir ', returnStatus: true)
+            synopsys_detect(detectProperties: '--blackduck.trust.cert=true  --detect.project.version.name=${DETECT_VERSION} --detect.project.name=${DETECT_PROJECT} --detect.cleanup=true --blackduck.offline.mode=false  --detect.blackduck.signature.scanner.snippet.matching=NONE --detect.detector.search.depth=0 --detect.maven.build.command=${ENV_NAME} --detect.excluded.directories=idir ', returnStatus: true)
           }
         }
 
@@ -53,7 +57,7 @@ java --version'''
 
     stage('Coverity results') {
       steps {
-        coverityIssueCheck(coverityInstanceUrl: 'http://10.107.85.94:8080', credentialsId: 'Coverity94', markUnstable: true, viewName: 'Outstanding Issues', returnIssueCount: true, projectName: 'WebGoat')
+        coverityIssueCheck(coverityInstanceUrl: 'http://10.107.85.94:8080', credentialsId: 'Coverity94', markUnstable: true, viewName: 'Outstanding Issues', returnIssueCount: true, projectName: '${COVERITY_PROJECT}')
       }
     }
 
