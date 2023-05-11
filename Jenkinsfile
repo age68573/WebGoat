@@ -111,7 +111,7 @@ java --version'''
     jdk 'java17'
   }
   environment {
-    IMAGE_VERSION = 1
+    IMAGE_VERSION = '2'
     COVERITY_PROJECT = 'WebGoat'
     COVERITY_STREAM = 'WebGoat'
     DETECT_VERSION = 'v0.1'
