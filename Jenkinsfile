@@ -6,10 +6,10 @@ pipeline {
   }
   environment {
     IMAGE_VERSION = 1
-    COVERITY_PROJECT = WebGoat
-    COVERITY_STREAM = WebGoat
+    COVERITY_PROJECT = "WebGoat"
+    COVERITY_STREAM = "WebGoat"
     DETECT_VERSION = "v0.1"
-    DETECT_PROJECT = WebGoat
+    DETECT_PROJECT = "WebGoat"
   }
   stages {
     stage('echo') {
@@ -34,7 +34,7 @@ java --version'''
       parallel {
         stage('Run Coverity') {
           steps {
-            withCoverityEnvironment(coverityInstanceUrl: 'http://10.107.85.94:8080', createMissingProjectsAndStreams: true, credentialsId: 'Coverity94', projectName: ${COVERITY_PROJECT}, streamName: ${COVERITY_STREAM}, viewName: 'Outstanding Issues') {
+            withCoverityEnvironment(coverityInstanceUrl: 'http://10.107.85.94:8080', createMissingProjectsAndStreams: true, credentialsId: 'Coverity94', projectName: '${COVERITY_PROJECT}', streamName: '${COVERITY_STREAM}', viewName: 'Outstanding Issues') {
               sh '''mvn --version
 '''
             }
