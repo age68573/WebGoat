@@ -79,6 +79,7 @@ java --version'''
           withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
             sh "docker login -u age68573 -p ${dockerhub}"
             sh "docker push age68573/webgoat"
+            sh "docker rmi $(docker images -f "dangling=true" -q)"
           }
         }
 
