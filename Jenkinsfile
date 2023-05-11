@@ -30,15 +30,7 @@ java --version'''
           steps {
             withCoverityEnvironment(coverityInstanceUrl: 'http://10.107.85.94:8080', createMissingProjectsAndStreams: true, credentialsId: 'Coverity94', projectName: 'WebGoat', streamName: 'WebGoat', viewName: 'Outstanding Issues') {
               sh '''mvn --version
-echo ${cov-idir}
-echo "start Cpature ....."
-cov-build --dir ${cov-idir} mvn clean package -Dmaven.test.skip=true
-echo "list capture ....."
-coverity list
-echo "start analyze ....."
-cov-analyze --dir ${cov-idir} --strip-path `pwd`
-echo ${COV_URL}
-cov-commit-defects --dir ${cov-idir} --url ${COV_URL} --stream ${COV_STREAM} --auth-key-file ${COV_AUTH_KEY_PATH}'''
+'''
             }
 
           }
@@ -77,7 +69,7 @@ cov-commit-defects --dir ${cov-idir} --url ${COV_URL} --stream ${COV_STREAM} --a
 
     stage('Docker Build') {
       steps {
-        sh "docker build -t age68573/WebGoat ."
+        sh 'docker build -t age68573/webgoat .'
       }
     }
 
@@ -85,10 +77,11 @@ cov-commit-defects --dir ${cov-idir} --url ${COV_URL} --stream ${COV_STREAM} --a
       steps {
         script {
           withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
-              sh "docker login -u age68573 -p ${dockerhub}"
-              sh "dcoker push age68573/WebGoat"
+            sh "docker login -u age68573 -p ${dockerhub}"
+            sh "dcoker push age68573/webgoat"
           }
         }
+
       }
     }
 
