@@ -78,7 +78,7 @@ java --version'''
         script {
           withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
             sh "docker login -u age68573 -p ${dockerhub}"
-            sh "dcoker push age68573/webgoat"
+            sh "docker push age68573/webgoat"
           }
         }
 
