@@ -98,7 +98,7 @@ java --version'''
                     sed -i "s/replaceImageTag/${IMAGE_VERSION}/g" deploy/webgoat.yaml
                     git add deploy/webgoat.yaml
                     git commit -m "Update deployment image to version ${IMAGE_VERSION}"
-                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main --force
                 '''
         }
 
