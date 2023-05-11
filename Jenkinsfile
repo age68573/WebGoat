@@ -3,13 +3,7 @@ pipeline {
     node {
       label 'master'
     }
-  }
-  environment {
-    IMAGE_VERSION = 1
-    COVERITY_PROJECT = "WebGoat"
-    COVERITY_STREAM = "WebGoat"
-    DETECT_VERSION = "v0.1"
-    DETECT_PROJECT = "WebGoat"
+
   }
   stages {
     stage('echo') {
@@ -75,7 +69,7 @@ java --version'''
 
     stage('Docker Build') {
       steps {
-          sh "docker build -t age68573/webgoat:${IMAGE_VERSION} ."
+        sh "docker build -t age68573/webgoat:${IMAGE_VERSION} ."
       }
     }
 
@@ -87,32 +81,40 @@ java --version'''
             sh "docker push age68573/webgoat:${IMAGE_VERSION}"
           }
         }
+
       }
     }
-    
+
     stage('Update Deployment File') {
-        environment {
-            GIT_REPO_NAME = "WebGoat"
-            GIT_USER_NAME = "age68573"
-        }
-        steps {
-            withCredentials([string(credentialsId: 'Github_Token', variable: 'GITHUB_TOKEN')]) {
-                sh '''
+      environment {
+        GIT_REPO_NAME = 'WebGoat'
+        GIT_USER_NAME = 'age68573'
+      }
+      steps {
+        withCredentials(bindings: [string(credentialsId: 'Github_Token', variable: 'GITHUB_TOKEN')]) {
+          sh '''
                     git config user.email "s1410523045@gms.nutc.edu.tw"
                     git config user.name "age68573"
                     sed -i "s/replaceImageTag/${IMAGE_VERSION}/g" deploy/webgoat.yaml
                     git add deploy/webgoat.yaml
                     git commit -m "Update deployment image to version ${IMAGE_VERSION}"
-                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} blueocean
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} main
                 '''
-            }
         }
+
+      }
     }
 
-   
   }
   tools {
     maven 'maven3.9'
     jdk 'java17'
+  }
+  environment {
+    IMAGE_VERSION = 1
+    COVERITY_PROJECT = 'WebGoat'
+    COVERITY_STREAM = 'WebGoat'
+    DETECT_VERSION = 'v0.1'
+    DETECT_PROJECT = 'WebGoat'
   }
 }
