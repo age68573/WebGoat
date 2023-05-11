@@ -75,24 +75,13 @@ cov-commit-defects --dir ${cov-idir} --url ${COV_URL} --stream ${COV_STREAM} --a
       }
     }
 
-    stage('Build Image') {
-      parallel {
-        stage('Docker Build') {
-          steps {
-            sh 'echo "docker build"'
-          }
-        }
-
-        stage('Docker Login') {
-          steps {
-            sh 'echo "docker login"'
-          }
-        }
-
+    stage('Docker Build') {
+      steps {
+        sh 'echo "docker build"'
       }
     }
 
-    stage('Push Image') {
+    stage('Docker Push') {
       steps {
         sh 'echo "push"'
       }
