@@ -8,7 +8,7 @@ pipeline {
     IMAGE_VERSION = 1
     COVERITY_PROJECT = WebGoat
     COVERITY_STREAM = WebGoat
-    DETECT_VERSION = v0.1
+    DETECT_VERSION = "v0.1"
     DETECT_PROJECT = WebGoat
   }
   stages {
