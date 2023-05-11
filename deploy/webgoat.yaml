@@ -19,7 +19,7 @@ spec:
         app: webgoat
     spec:
       containers:
-      - image: age68573/webgoat:replaceImageTag
+      - image: age68573/webgoat:1
         name: webgoat
         ports:
         - containerPort: 8080
