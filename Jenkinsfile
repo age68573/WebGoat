@@ -105,13 +105,19 @@ java --version'''
       }
     }
 
+    stage('Seeker') {
+      steps {
+        synopsysSeeker(projectKey: 'webgoat_webgoat', reportFormat: 'NONE', condition: 'pdf')
+      }
+    }
+
   }
   tools {
     maven 'maven3.9'
     jdk 'java17'
   }
   environment {
-    IMAGE_VERSION = '2'
+    IMAGE_VERSION = '3'
     COVERITY_PROJECT = 'WebGoat'
     COVERITY_STREAM = 'WebGoat'
     DETECT_VERSION = 'v0.1'
