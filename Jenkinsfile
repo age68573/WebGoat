@@ -107,7 +107,7 @@ java --version'''
 
     stage('Seeker') {
       steps {
-        synopsysSeeker(projectKey: 'webgoat_webgoat', reportFormat: 'NONE', condition: 'pdf')
+        synopsysSeeker(projectKey: 'webgoat_webgoat', reportFormat: 'pdf', condition: 'NONE')
       }
     }
 
